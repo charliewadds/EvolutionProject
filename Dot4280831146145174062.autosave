@@ -1,0 +1,74 @@
+class Dot{
+    PVector pos;//TODO how the shit do these work??
+    PVector vel;
+    PVector acc;
+    float fitness;
+    Gene gene;
+    boolean alive = true;
+    boolean reached = false;
+    Dot(){
+        println("dot Coststructor");
+        pos= new PVector(100, 500/2);//TODO hardcoding
+        vel= new PVector(0.1,0.1); 
+        acc= new PVector(0.1,0.1);
+        gene = new Gene(400);//change to 400
+
+    }
+    Dot(Dot parent){//this is janky as hell there has to be a better way
+      pos= new PVector(100, 500/2);//TODO hardcoding
+        vel= new PVector(0.1,0.1); 
+        acc= new PVector(0.1,0.1);
+      gene = parent.gene;
+      alive = true;
+      reached = false;
+      
+    }
+    
+    void show(){
+        ellipse(pos.x,pos.y,4,4);
+         
+    }
+
+    void move(){
+    //  println(gene.directions.length);
+    if(alive){
+        if(gene.directions.length > gene.step){
+            acc = gene.directions[gene.step];
+            gene.step ++;
+        }
+        vel.limit(5);
+        vel.add(acc);
+        pos.add(vel);
+
+    }
+
+    }
+
+    void update(){
+      
+        if(alive && !reached){
+            move(); 
+            if(pos.x<2||pos.y<2||pos.x>1000-2||pos.y>500-2){//kill if outside of display
+                alive = false;
+                
+            }else if(dist(pos.x,pos.y,fin.x,fin.y)<5){
+                reached = true; 
+            }
+        }else{
+          
+        }
+    }
+    
+    void fitness(){
+       float howFar = dist(pos.x,pos.y,fin.x,fin.y); 
+       fitness = (float)(fitnessAdj/howFar);
+      
+      
+    }
+
+
+
+
+
+
+}
