@@ -8,7 +8,7 @@ class Dot{
     boolean reached = false;
     boolean isBest = false;
     Dot(){
-        println("dot Coststructor");
+        
         pos= new PVector(100, 500/2);//TODO hardcoding
         vel= new PVector(0,0); 
         acc= new PVector(0,0);
@@ -31,8 +31,13 @@ class Dot{
       }else{
         noFill();
       }
+      if(gene.step<=399){
+        alive = false;//this should be in a different function 
         ellipse(pos.x,pos.y,4,4);
-         
+      }else{
+        print("done");
+          
+        }
     }
 
     void move(){

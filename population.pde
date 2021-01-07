@@ -59,7 +59,7 @@ class population{
   void naturalSelection(){
      //<>//
     Dot[] newGen  = new Dot[dots.length];
-
+    setBestDot();
     newGen[0] = dots[bestDot].makeChild(newGen[0]);
     newGen[0].isBest = true;
     for(int i = 1; i<dots.length; i++){
