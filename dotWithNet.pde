@@ -7,7 +7,7 @@ void setup(){
 
     size(1000, 500);
     //start = new Dot();
-    pop = new population(500);
+    pop = new population(1000);
     fin = new goal(900,250);
     fitnessAdj = dist(startX,startY,fin.x,fin.y);
     println("setup");

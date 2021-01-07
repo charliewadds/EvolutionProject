@@ -32,10 +32,10 @@ class Dot{
         noFill();
       }
       if(gene.step<=399){
-        alive = false;//this should be in a different function 
+
         ellipse(pos.x,pos.y,4,4);
       }else{
-        print("done");
+                alive = false;//this should be in a different function 
           
         }
     }
@@ -75,7 +75,7 @@ class Dot{
        
        if(reached){
          fitness = 1/(gene.step);
-         fitness += 1000;
+         fitness += 10000;
        }else{
          fitness = (float)(fitnessAdj/howFar);
        }
