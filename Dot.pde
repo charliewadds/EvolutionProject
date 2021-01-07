@@ -56,7 +56,7 @@ class Dot{
     }
 
     void update(){
-      
+        obstacleCheck();
         if(alive && !reached){
             move(); 
             if(pos.x<2||pos.y<2||pos.x>1000-2||pos.y>500-2){//kill if outside of display
@@ -68,6 +68,18 @@ class Dot{
         }else{
           
         }
+    }
+
+    void obstacleCheck(){
+      int i = 0;
+      while(i<obst.size()){
+        if(obst.get(i).hit(pos.x,pos.y)){
+          alive = false;
+        }
+        i++;
+      }
+
+
     }
     
     void fitness(){
