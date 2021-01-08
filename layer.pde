@@ -1,10 +1,10 @@
 //lists of connetions an neurons for a given layer
-class layer{
+class layer {
     int layer;
     boolean isOutput = false; 
     neuron[] neurons;//TODO everything is going to need to switch to array list when i implement variable structure
     ArrayList<connection> connections = new ArrayList<connection>();//these are outgoing connections if there are none it is the output layer
-    layer(int size, int layer){//TODO generate connections to all
+    layer(int size, int layer, boolean isOutput){//TODO generate connections to all
         
         this.neurons = new neuron[size];
         
@@ -13,14 +13,13 @@ class layer{
            neurons[i] = new neuron(layer); 
         }
 
-        if(layer+1 == layers.size()){
-            isOutput = true;
-        }
+        this.isOutput = isOutput;
     }
     //sets the values of all neurons in the layer to a list of floats 
     void setIn(float[] inpts){
         int x = 0;
-        while(x<=neurons.length){
+        while(x<neurons.length){
+            //print(inpts.length);
             neurons[x].value=inpts[x];
             neurons[x].layer=layer;
 
@@ -29,6 +28,9 @@ class layer{
 
 
     }
+
+
+    /*
     void generateConnects(float[] weights){
         println("hello from layer.generateConnects()  ");
         connection curr;
@@ -68,29 +70,30 @@ class layer{
             println("hello from layer.generateConnects() after everything  ");
             //TODO put setWeights here
         }
+
+        */
     
     void runNN(){
         //ArrayList<Float> out = new ArrayList<Float>();
-        println("hello from layer.runNN ");
+        
         connection curr;
         if(!isOutput){
             for(int i=0;i<connections.size();i++){
-                println("hello from layer.runNN before connections.get");
+                
                 curr = connections.get(i);
-                println("hello from layer.runNN after connections.get");
-                print(curr.weight);
+                
                 float currVal = (curr.neuronIn.value)*curr.weight;
                 neuron in = curr.neuronIn;
                 
-                println("hello from layer.runNN before curr");
+                
                 curr.neuronOut.value= currVal;
-                println("hello from layer.runNN after curr");
+                
                 curr.neuronOut.go();
 
 
             }
         }
-        println("hello from layer.runNN after everything");
+        
         //for(int i =0;i<curr.neurons.length;i++){
         //    out.add(curr.neurons[i].value);
 

@@ -4,45 +4,48 @@ ArrayList<obstacle> obst = new ArrayList<obstacle>();
 population pop;
 goal fin;
 float fitnessAdj;
-ArrayList<layer>  layers = new ArrayList<layer>();
+//ArrayList<layer>  layers = new ArrayList<layer>();
 void setup(){
 
 
     //add the layers
-    layers.add(new layer(10,0));//10 inputs
-    layers.add(new layer(2,1));
-    layers.add(new layer(2,2));//2 output neurons one for x and one for y of a PVector
+    //layers.add(new layer(10,0));//10 inputs //<>//
+    //layers.add(new layer(2,1));//TODO i think this has to go in neuralNetwork class
+    //layers.add(new layer(2,2));//2 output neurons one for x and one for y of a PVector
 
     //add the obstacles
+    fin = new goal(900,250); //<>//
+    
     obst.add(new obstacle(250,312,50,400));
     obst.add(new obstacle(500,150,50,400));
     obst.add(new obstacle(750,312,50,400));
     
     size(1000, 500);
     //start = new Dot();
-    pop = new population(5000);
-    fin = new goal(900,250);
+    
+    pop = new population(50);
+    
     fitnessAdj = dist(startX,startY,fin.x,fin.y);
-    println("setup");
+    
 
 }
 //test new branch5
 
 void draw(){
-    print("hi");
+   
     background(255);
     textSize(32);
     text(pop.generation, 10, 30); 
-    print("hi");
+    
     for(obstacle i:obst){
     i.show();//TODO make this show all obstacles
     //obst.get(1).show();//TODO make this show all obstacles
     //obst.get(2).show();//TODO make this show all obstacles
     } 
-    print("hi");
+  
     fin.show();
     fin.show();
-    print("hi");
+     //<>//
     if(pop.allDead()){
       pop.calculateFitness(); //<>//
       pop.naturalSelection();
@@ -50,9 +53,9 @@ void draw(){
         
     }else{
     pop.update();
-    print("after update");
+    
     pop.show();
-    print("after show");
+    
     }
 
 

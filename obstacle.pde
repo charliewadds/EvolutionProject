@@ -25,7 +25,7 @@ class obstacle{
         boolean hit(float playerX, float playerY){
             
             if( (playerY>= y-(height/2)) && (playerY<=y+(height/2)) &&  (playerX>=x - (width/2))  &&  (playerX<= x + (width/2))){
-                print("crash");
+                
                 return true;
             }
             return false;

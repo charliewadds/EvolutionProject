@@ -1,11 +1,15 @@
 class population{
+  
   Dot[] dots;
     int bestDot;
   int generation=0;
   population(int size){
+    
     dots = new Dot[size];
     for(int i = 0; i<size; i++){
+      
       dots[i]= new Dot();
+      
     }
       
       
@@ -20,7 +24,7 @@ class population{
     } 
   }
   void update(){
-    println("hello from population.update");
+    
     for(int i = 0; i<dots.length; i++){
       dots[i].update();
     } 
@@ -60,10 +64,10 @@ class population{
   void naturalSelection(){
      //<>//
     Dot[] newGen  = new Dot[dots.length];
-    setBestDot();
-    newGen[0] = dots[bestDot].makeChild(newGen[0]);
-    newGen[0].isBest = true;
-    for(int i = 1; i<dots.length; i++){
+    //setBestDot();
+    //newGen[0] = dots[bestDot].makeChild(newGen[0]);
+    //newGen[0].isBest = true;
+    for(int i = 0; i<dots.length; i++){
       Dot parent = pickParent();
 
       newGen[i] = parent.makeChild(newGen[i]);

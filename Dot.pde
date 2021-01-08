@@ -13,23 +13,32 @@ class Dot{
         
         pos= new PVector(100, 500/2);//TODO hardcoding
         vel= new PVector(0,0); 
-        acc= new PVector(0,0);
-        gene = new Gene(44);//TODO this is hard coding
+        acc= new PVector(0,0); //<>//
+        gene = new Gene(24);//TODO this is hard coding
+        senses = new float[10];
         myBrain = new neuralNetwork(senses,gene.weights);
+        
+        look(); //<>//
+        
+        myBrain.setInputs(senses);
 
     } //<>//
     
     
 
     void look(){//set senses
+        
         senses[0]= dist(pos.x,pos.y,fin.x,fin.y);//distance to the end
+        
         raycast();
-
+        
 
 
     }
 
     void raycast(){
+
+    
     float[] rays = new float[9];
     int i = 0;
     int ii = 0;
@@ -40,7 +49,8 @@ class Dot{
     int theta;
     float startX = pos.x;
     float startY = pos.y;
-    while(i<=9){//9 different rays+
+    while(i<9){//9 different rays+
+      
       x=0;//x position of the end of the ray
       y=0;// y position of the end of the ray
     
@@ -48,18 +58,20 @@ class Dot{
       found = false;
       raylengths = 0;
       while(!found){
+        
         theta +=0.698132;// add 40 degrees in radians
         x+= 10*Math.sin(theta);// x distance at the current angle
         y+= 10*Math.sin(theta);// y distance at the current angle
         ii = 0;
         raylengths++;
         while(ii<obst.size()){//check all the obstacles
-          if(obst.get(i).hit(pos.x,pos.y)){//if it hit an obstacle
+          
+          if(obst.get(ii).hit(pos.x,pos.y)||(x<2||y<2||x>1000-2||y>500-2)){//if it hit an obstacle
            found = true;
            senses[i+1] = raylengths*10;
 
           }
-          i++;
+          ii++;
         }
       }
 
@@ -70,11 +82,12 @@ class Dot{
     }
 
     void show(){
+      //print("show");
       if(isBest){
         fill(0,255,0);
-        //ellipse(pos.x,pos.y,4,4);
+        ellipse(pos.x,pos.y,4,4);
       }else{
-        noFill();
+        //noFill();
       }
       if(gene.step<=399){
 
@@ -86,13 +99,13 @@ class Dot{
     }
 
     void move(){
-    //  println(gene.directions.length);
-    println("hello from dots.move");
+    
     if(alive){
-        
+            
+        look();
         acc.x = myBrain.think(gene.weights).get(0);//TODO this is where the nn thinks
         acc.y = myBrain.think(gene.weights).get(1);
-        println("hello from dots.update after think");
+        //println(acc.x);
         //gene.step ++;
         
         vel.limit(5);
@@ -104,12 +117,12 @@ class Dot{
     }
 
     void update(){
-      println("hello from dots.update");
+      
         obstacleCheck();
-        println("hello from dots.update after populationCheck()");
+        
         if(alive && !reached){
             move(); 
-            println("hello from dots.update after move()");
+            
             if(pos.x<2||pos.y<2||pos.x>1000-2||pos.y>500-2){//kill if outside of display
                 alive = false;
                 

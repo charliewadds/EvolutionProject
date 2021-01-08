@@ -2,7 +2,7 @@
 //this is kinda garbage but it works
 class Gene{
     float[] weights;//the number of weight is the same as the number of connections in this case 44
-    neuralNetwork net;
+    //neuralNetwork net;
     
     int step = 0;//tf is this
 
@@ -19,7 +19,7 @@ class Gene{
         for(int i=0; i<weights.length; i++){
             float randWeight = (float)(Math.random() *2)-1;
             weights[i]= randWeight;//add a move to the weights list based on a random angle
-
+            //print(weights[i]);
 
         }
 
