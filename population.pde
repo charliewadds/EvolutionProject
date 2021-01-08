@@ -1,5 +1,5 @@
 class population{
-  
+  float fitnessSumOut = 0;
   Dot[] dots;
     int bestDot;
   int generation=0;
@@ -43,6 +43,7 @@ class population{
     for(int i = 0; i<dots.length; i++){
       sum += dots[i].fitness;
     } 
+    fitnessSumOut =sum;
     return sum;
 
   }

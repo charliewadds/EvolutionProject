@@ -23,7 +23,7 @@ void setup(){
     size(1000, 500);
     //start = new Dot();
     
-    pop = new population(50);
+    pop = new population(500);
     
     fitnessAdj = dist(startX,startY,fin.x,fin.y);
     
@@ -35,7 +35,9 @@ void draw(){
    
     background(255);
     textSize(32);
-    text(pop.generation, 10, 30); 
+    text(pop.generation, 10, 30);
+    fill(0,255,0);
+    text(pop.fitnessSumOut, 100, 30); 
     
     for(obstacle i:obst){
     i.show();//TODO make this show all obstacles
