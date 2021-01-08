@@ -87,12 +87,10 @@ class Dot{
 
     void move(){
     //  println(gene.directions.length);
-    println("hello from dots.move");
     if(alive){
         
-        acc.x = myBrain.think(gene.weights).get(0);//TODO this is where the nn thinks
-        acc.y = myBrain.think(gene.weights).get(1);
-        println("hello from dots.update after think");
+        acc.x = myBrain.think().get(0);//TODO this is where the nn thinks
+        acc.y = myBrain.think().get(1);
         //gene.step ++;
         
         vel.limit(5);
@@ -104,12 +102,9 @@ class Dot{
     }
 
     void update(){
-      println("hello from dots.update");
         obstacleCheck();
-        println("hello from dots.update after populationCheck()");
         if(alive && !reached){
             move(); 
-            println("hello from dots.update after move()");
             if(pos.x<2||pos.y<2||pos.x>1000-2||pos.y>500-2){//kill if outside of display
                 alive = false;
                 

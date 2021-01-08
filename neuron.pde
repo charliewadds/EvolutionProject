@@ -1,24 +1,22 @@
 class neuron{
     int layer;
-    float value;
+    float value = 0;
     connection[] connections;
-    neuron(){
+    neuron(int layer){
+      this.layer = layer;
 
 
     }
 
-    float go(){
+    void go(){
         if(layer !=0){
-            return sigmoid(value);//only use activation function on non imput layers
-        }else{
-            return value;
+            value = tanh(value);//only use activation function on non imput layers
         }
-        
 
     }
 
     float tanh(float x) {
-    float y = Math.tanh(2*x);
+    float y = (float)Math.tanh(2*x);
     return y;
   }
 

@@ -21,10 +21,30 @@ class neuralNetwork{
 
     }
 
-    float[] think(){
+    ArrayList<Float> think(float[] weights){
+        println("hello from neuralNetowrk.think");
+        ArrayList<Float> out = new ArrayList<Float>();
+        
+        for(int i=0;i<layers.size();i++){
+
+            layers.get(i).generateConnects(weights);
+            println("hello from neuralNetowrk.think after generateConnects");
+            layers.get(i).runNN();
+            
+            println("hello from neuralNetowrk.think after layers.get");
+            if(layers.get(i).isOutput){
+                for(int ii = 0;ii<layers.get(i).neurons.length;ii++){
+                    
+                    out.add(layers.get(i).neurons[ii].value);
+
+                }
+            }
+        }
+        println("hello from neuralNetowrk.think after everything");
+        return out;
         
 
-        return ;
+        
     }
 
     

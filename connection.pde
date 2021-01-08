@@ -6,7 +6,9 @@ class connection{
 
 
     connection(float weight, neuron neuronIn, neuron neuronOut){
-
+        this.weight = weight;
+        this.neuronIn = neuronIn;
+        this.neuronOut = neuronOut;
 
     }
 

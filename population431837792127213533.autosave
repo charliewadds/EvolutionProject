@@ -20,7 +20,6 @@ class population{
     } 
   }
   void update(){
-    println("hello from population.update");
     for(int i = 0; i<dots.length; i++){
       dots[i].update();
     } 
@@ -31,8 +30,8 @@ class population{
   void calculateFitness(){
     for(int i = 0; i<dots.length; i++){
       dots[i].fitness();
-    }  //<>//
-  } //<>//
+    } 
+  }
 
   float fitnessSum(){
     float sum = 0;
@@ -58,7 +57,7 @@ class population{
   }
   
   void naturalSelection(){
-     //<>//
+    
     Dot[] newGen  = new Dot[dots.length];
     setBestDot();
     newGen[0] = dots[bestDot].makeChild(newGen[0]);
@@ -80,7 +79,7 @@ class population{
 
     float runningSum =0;
 
-    int i =0; //<>//
+    int i =0;
     while(i<dots.length){
        runningSum += dots[i].fitness;
        if(runningSum>rand){
@@ -95,7 +94,7 @@ class population{
 
   }
   //this name feels wrong...
-   //<>//
+  
   //another bad name 
   void mutateChildren(){
     for(int i = 0; i<dots.length; i++){
