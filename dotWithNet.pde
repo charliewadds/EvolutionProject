@@ -4,7 +4,16 @@ ArrayList<obstacle> obst = new ArrayList<obstacle>();
 population pop;
 goal fin;
 float fitnessAdj;
+ArrayList<layer>  layers = new ArrayList<layer>();
 void setup(){
+
+
+    //add the layers
+    layers.add(new layer(0,10));//10 inputs
+    layers.add(new layer(1,2));
+    layers.add(new layer(2,2));//2 output neurons one for x and one for y of a PVector
+
+    //add the obstacles
     obst.add(new obstacle(250,312,50,400));
     obst.add(new obstacle(500,150,50,400));
     obst.add(new obstacle(750,312,50,400));

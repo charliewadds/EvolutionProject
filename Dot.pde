@@ -7,16 +7,68 @@ class Dot{
     boolean alive = true;
     boolean reached = false;
     boolean isBest = false;
+    neuralNetwork myBrain;
+    float[] senses;
     Dot(){
         
         pos= new PVector(100, 500/2);//TODO hardcoding
         vel= new PVector(0,0); 
         acc= new PVector(0,0);
-        gene = new Gene(700);
+        gene = new Gene(44);//TODO this is hard coding
+        myBrain = new neuralNetwork(senses,gene.weights);
 
     } //<>//
     
     
+
+    void look(){//set senses
+        senses[0]= dist(pos.x,pos.y,fin.x,fin.y);//distance to the end
+        raycast();
+
+
+
+    }
+
+    void raycast(){
+    float[] rays = new float[9];
+    int i = 0;
+    int ii = 0;
+    int raylengths = 0;
+    boolean found = false;
+    float x = 0;
+    float y = 0;
+    int theta;
+    float startX = pos.x;
+    float startY = pos.y;
+    while(i<=9){//9 different rays+
+      x=0;//x position of the end of the ray
+      y=0;// y position of the end of the ray
+    
+      theta = 0;//angle in radians
+      found = false;
+      raylengths = 0;
+      while(!found){
+        theta +=0.698132;// add 40 degrees in radians
+        x+= 10*Math.sin(theta);// x distance at the current angle
+        y+= 10*Math.sin(theta);// y distance at the current angle
+        ii = 0;
+        raylengths++;
+        while(ii<obst.size()){//check all the obstacles
+          if(obst.get(i).hit(pos.x,pos.y)){//if it hit an obstacle
+           found = true;
+           senses[i+1] = raylengths*10;
+
+          }
+          i++;
+        }
+      }
+
+
+      i++;
+    }
+
+    }
+
     void show(){
       if(isBest){
         fill(0,255,0);
@@ -36,10 +88,11 @@ class Dot{
     void move(){
     //  println(gene.directions.length);
     if(alive){
-        if(gene.directions.length > gene.step){
-            acc = gene.directions[gene.step];
-            gene.step ++;
-        }
+        
+        acc.x = myBrain.think()[0];//TODO this is where the nn thinks
+        acc.y = myBrain.think()[1];
+        //gene.step ++;
+        
         vel.limit(5);
         vel.add(acc);
         pos.add(vel);

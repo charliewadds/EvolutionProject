@@ -1,13 +1,14 @@
 //TODO make this use NN
 //this is kinda garbage but it works
 class Gene{
-    PVector[] directions;
+    float[] weights;//the number of weight is the same as the number of connections in this case 44
+    neuralNetwork net;
     
     int step = 0;//tf is this
 
     Gene(int size){
 
-        directions = new PVector[size]; 
+        weights = new float[size]; 
         randomise();
 
 
@@ -15,9 +16,9 @@ class Gene{
 
     void randomise(){
 
-        for(int i=0; i<directions.length; i++){
-            float randAngle = random(2*PI);
-            directions[i]= PVector.fromAngle(randAngle);//add a move to the directions list based on a random angle
+        for(int i=0; i<weights.length; i++){
+            float randWeight = (float)(Math.random() *2)-1;
+            weights[i]= randWeight;//add a move to the weights list based on a random angle
 
 
         }
@@ -26,12 +27,12 @@ class Gene{
 
 
     void mutate(){
-        float mutationRate = 0.01;//1% of all "genes" in this case directions are changed
-        for(int i=0; i<directions.length; i++){
-            float rand = random(1);
-            if(rand<mutationRate){
-                float randAngle = random(2*PI);
-                directions[i]= PVector.fromAngle(randAngle);
+        float mutationRate = 0.01;//1% of all "genes" in this case weights are changed
+        for(int i=0; i<weights.length; i++){
+            float rand = random(1);//random number from 0 to 1
+            if(rand<mutationRate){//1% of the time
+                float randAngle = (float)(Math.random() *2)-1;//between -1 and 1
+                weights[i]= randAngle;
 
             }
 
@@ -41,9 +42,9 @@ class Gene{
     }
     Gene clone(){
 
-        Gene clone = new Gene(directions.length);
-        for(int i=0; i<directions.length; i++){
-            clone.directions[i]= directions[i].copy();
+        Gene clone = new Gene(weights.length);
+        for(int i=0; i<weights.length; i++){
+            clone.weights[i]= weights[i];
         }
         return clone;
     }
