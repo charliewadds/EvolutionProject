@@ -1,5 +1,5 @@
 class Dot{
-    PVector pos;//TODO how the shit do these work??
+    PVector pos;
     PVector vel;
     PVector acc;
     float fitness;
@@ -12,22 +12,15 @@ class Dot{
         pos= new PVector(100, 500/2);//TODO hardcoding
         vel= new PVector(0,0); 
         acc= new PVector(0,0);
-        gene = new Gene(400);
+        gene = new Gene(700);
 
     } //<>//
-    Dot(Dot parent){//this is janky as hell there has to be a better way
-      pos= new PVector(100, 500/2);//TODO hardcoding
-        vel= new PVector(0,0); 
-        acc= new PVector(0,0);
-      gene = parent.gene;
-      alive = true;
-      reached = false;
-      
-    }
+    
     
     void show(){
       if(isBest){
         fill(0,255,0);
+        //ellipse(pos.x,pos.y,4,4);
       }else{
         noFill();
       }
