@@ -7,6 +7,7 @@ float fitnessAdj;
 void setup(){
     obst.add(new obstacle(250,312,50,400));
     obst.add(new obstacle(500,150,50,400));
+    obst.add(new obstacle(750,312,50,400));
     
     size(1000, 500);
     //start = new Dot();
