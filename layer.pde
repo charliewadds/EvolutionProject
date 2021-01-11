@@ -83,15 +83,20 @@ class layer {
                 curr = connections.get(i);
                 
                 float currVal = (curr.neuronIn.value)*curr.weight;
-                neuron in = curr.neuronIn;
+                //neuron in = curr.neuronIn;
                 
                 
-                curr.neuronOut.value= currVal;
+                curr.neuronOut.value += currVal;
                 
-                curr.neuronOut.go();
+                
 
 
             }
+        }
+
+        for(int i=0;i<connections.size();i++){//apply activation function to each neuron after all the values are added
+            curr = connections.get(i);
+            curr.neuronOut.go();
         }
         
         //for(int i =0;i<curr.neurons.length;i++){

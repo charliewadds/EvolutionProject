@@ -22,9 +22,9 @@ void setup(){
     
     size(1000, 500);
     //start = new Dot();
-    
+    print("here");
     pop = new population(500);
-    
+    print("here");
     fitnessAdj = dist(startX,startY,fin.x,fin.y);
     
 
@@ -32,7 +32,7 @@ void setup(){
 //test new branch5
 
 void draw(){
-   
+    
     background(255);
     textSize(32);
     text(pop.generation, 10, 30);
@@ -41,10 +41,10 @@ void draw(){
     
     for(obstacle i:obst){
     i.show();//TODO make this show all obstacles
-    //obst.get(1).show();//TODO make this show all obstacles
-    //obst.get(2).show();//TODO make this show all obstacles
+    obst.get(1).show();//TODO make this show all obstacles
+    obst.get(2).show();//TODO make this show all obstacles
     } 
-  
+    
     fin.show();
     fin.show();
      //<>//

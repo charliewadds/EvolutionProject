@@ -65,10 +65,10 @@ class population{
   void naturalSelection(){
      //<>//
     Dot[] newGen  = new Dot[dots.length];
-    //setBestDot();
-    //newGen[0] = dots[bestDot].makeChild(newGen[0]);
-    //newGen[0].isBest = true;
-    for(int i = 0; i<dots.length; i++){
+    setBestDot();
+    newGen[0] = dots[bestDot].makeChild(newGen[0]);
+    newGen[0].isBest = true;
+    for(int i = 1; i<dots.length; i++){
       Dot parent = pickParent();
 
       newGen[i] = parent.makeChild(newGen[i]);
@@ -84,7 +84,7 @@ class population{
     float rand = random(fitnessSum());
 
     float runningSum =0;
-
+    //print(runningSum);
     int i =0; //<>//
     while(i<dots.length){
        runningSum += dots[i].fitness;
