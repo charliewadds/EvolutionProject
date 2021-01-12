@@ -15,9 +15,9 @@ class obstacle{
         }
         void show(){
             rectMode(CENTER);
-            fill(255,0,0);
+            fill(0,0,255);
             rect(x,y,width,height);
-            
+            circle(x,y,20);
             noFill();
 
         }
