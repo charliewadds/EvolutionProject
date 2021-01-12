@@ -1,6 +1,6 @@
 float startX = 100;//start position for the dots 
 float startY = 250;//TODO make this random withis a given area for a more robust algorithm
-
+//test
 //list of obstacles in the world
 ArrayList<obstacle> obst = new ArrayList<obstacle>();
 
