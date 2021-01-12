@@ -17,7 +17,7 @@ class neuron{
 
     float tanh(float x) {
     //x = x*.9;
-    float y = (float)Math.tanh(x);
+    float y = (float)Math.tanh(1.5*x);
     //print(y);
     return y;
   }

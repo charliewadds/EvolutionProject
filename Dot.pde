@@ -15,7 +15,8 @@ class Dot{
         pos= new PVector(100, 500/2);//TODO hardcoding
         vel= new PVector(0,0); 
         acc= new PVector(0,0); //<>// //<>//
-        gene = new Gene(24);//TODO this is hard coding
+        
+        gene = new Gene(32);//TODO this is hard coding
         senses = new float[10];
         myBrain = new neuralNetwork(senses,gene.weights);
         
@@ -29,7 +30,7 @@ class Dot{
 
     void look(){//set senses
         
-        senses[0]= dist(pos.x,pos.y,fin.x,fin.y)/900;//distance to the end TODO might want to inverse this
+        senses[0]= 1/dist(pos.x,pos.y,fin.x,fin.y)/900;//distance to the end TODO might want to inverse this
         senses[1]= 1;
         normalizeLook();
         raycast();
@@ -39,7 +40,7 @@ class Dot{
     } 
     void normalizeLook(){
       for(int i = 2; i< senses.length; i++){//start at 2 so only normalize raycasts
-        senses[i] = senses[i]/200;
+        senses[i] = 50/(senses[i]);
 
 
       }
@@ -59,35 +60,37 @@ class Dot{
     float y = 0;
     float theta;
     float startX = pos.x;
+    boolean printed = false;
     float startY = pos.y;
     while(i<numRays){//9 different rays+
       
-      x=0;//x position of the end of the ray
-      y=0;// y position of the end of the ray
+      x =  pos.x;//x position of the end of the ray
+      y =pos.y;// y position of the end of the ray
     
       theta = 0;//angle in radians
       found = false;
       raylengths = 0;
-      while(!found){
+      theta +=0.436332;// add 40 degrees in radians
+      while(!found){//loop until hit
+         
         
-        theta +=0.436332;// add 40 degrees in radians
-        x+= 10*Math.sin(theta);// x distance at the current angle
-        //println(x);
-        y+= 10*Math.sin(theta);// y distance at the current angle
+        // x distance at the current angle
+        x+=10*(float)Math.sin(theta);
+        y+= 10*(float)Math.sin(theta);// y distance at the current angle
         ii = 0;
         raylengths++;
-        //print("x is: "); println(x);
-        //print("y is: "); println(y);
+        
+        
         while(ii<obst.size()){//check all the obstacles
-          
+        
           if(obst.get(ii).hit(x,y)||(x<2||y<2||x>1000-2||y>500-2)){//if it hit an obstacle
-           found = true;
-           senses[i+1] = raylengths*10;
+            found = true;
+            senses[i+1] = raylengths*10;
            
-           //print("sense#:");
-           //print(i+1);
-           //print(" is: ");
-           //println((raylengths*10));
+            
+          
+            break;
+          
 
           }
           ii++;
@@ -106,20 +109,22 @@ class Dot{
 
     void show(){
       //print("show");
+      if(!alive&& !isBest){
+        fill(255,0,0);
+      }
       if(isBest){
         fill(0,255,0);
-        ellipse(pos.x,pos.y,4,4);
-      }else{
-        noFill();
-        ellipse(pos.x,pos.y,4,4);
+       
       }
+        ellipse(pos.x,pos.y,4,4);
+        noFill();
       
       //println(fitness);
     }
 
     void move(){
       //print(alive);
-      if(moves>500){
+      if(moves>300){
         alive = false;
       }
 
@@ -128,13 +133,10 @@ class Dot{
       if(alive){
           moves++;  
           look();
-          //acc = PVector.fromAngle(myBrain.think(gene.weights).get(0)*6.2);//TODO this is where the nn thinks
-          //acc.x = (float)(Math.random() *2)-1;
-          //acc.y = (float)(Math.random() *2)-1;
+          
           acc.x = myBrain.think(gene.weights, senses).get(0);
           acc.y = myBrain.think(gene.weights, senses).get(1);
-          //println(acc.x);
-          //gene.step ++;
+         
           
           vel.limit(6);
           vel.add(acc);
@@ -147,7 +149,9 @@ class Dot{
     void update(){
       
         obstacleCheck();
-        
+        if(vel.mag()<2 && moves >20){
+          alive = false;
+        }
         if(alive && !reached){
             move(); 
             
@@ -182,7 +186,7 @@ class Dot{
          fitness += 10000;
        }else{
          fitness = (float)(1/howFar);
-         fitness += moves/20;
+         fitness += moves/40;
        }
        //println(fitness);
        
