@@ -133,14 +133,15 @@ class population{
        runningSum += dots[i].fitness;
        if(runningSum>rand&& dots[i].fitness>0.2){
          return dots[i]; 
-       } else if(dots[i].fitness>0.2){
-         i--;
+       } else if(dots[i].fitness>0.2) {
+         dots[i].gene.randomise();
+         return dots[i];
        }
+       
 
       i++;
     }
-    println("pickParent() not working properly line 127ish");
-    return null;
+   return null;
 
 
   }
