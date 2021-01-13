@@ -133,7 +133,9 @@ class population{
        runningSum += dots[i].fitness;
        if(runningSum>rand&& dots[i].fitness>0.2){
          return dots[i]; 
-       } 
+       } else if(dots[i].fitness>0.2){
+         i--;
+       }
 
       i++;
     }
