@@ -29,7 +29,7 @@ class Gene{
 
 
     void mutate(){
-        float mutationRate = 0.055;//5% of all "genes" in this case weights are changed
+        float mutationRate = 0.05;//5% of all "genes" in this case weights are changed
         float randRate = 0.005;//.05% of the time fully randomise gene
         for(int i=0; i<weights.length; i++){
             float rand = random(1);//random number from 0 to 1
@@ -49,6 +49,8 @@ class Gene{
         }
 
     }
+
+    
     Gene clone(){
 
         Gene clone = new Gene(weights.length);

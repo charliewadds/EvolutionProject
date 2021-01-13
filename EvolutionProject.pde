@@ -1,6 +1,6 @@
 float startX = 100;//start position for the dots 
 float startY = 250;//TODO make this random withis a given area for a more robust algorithm
-//test
+//int loopCount = 0;
 //list of obstacles in the world
 ArrayList<obstacle> obst = new ArrayList<obstacle>();
 
@@ -20,14 +20,18 @@ void setup(){
    
     fin = new goal(700,100); 
     
-    obst.add(new obstacle(500,400,700,50));
-    obst.add(new obstacle(500,200,50,200));
+    //obst.add(new obstacle(600,400,700,50));
+    //obst.add(new obstacle(500,200,50,200));
+
+    obst.add(new obstacle(300,250,50,300));
+    obst.add(new obstacle(500,100,50,300));
+
     
     
-    size(1000, 500);//initialize window
+    size(1000, 500, P2D);//initialize window
     
     
-    pop = new population(300);
+    pop = new population(400);
     
     
     
@@ -41,8 +45,8 @@ this is where everything "comes together"
 
 */
 void draw(){
-    
-    background(255);
+    //fin = new goal(700 + (random(200)-100),100);
+    //background(255);
     textSize(32);
     text(pop.generation, 10, 30);//display the generation on the window
     fill(0,255,0);
@@ -51,16 +55,17 @@ void draw(){
     //loop through all the obstacles and show them on the window
     for(obstacle i:obst){
     i.show();
-    } 
+    }
     
     fin.show();//show the goal
     
-     //<>//
+     //<all the dots dead?>//
     if(pop.allDead()){
-      pop.calculateFitness(); //<>//
-      pop.naturalSelection();
-      pop.mutateChildren();
-        
+      //pop.calculateFitness(); //<calculate and update each dot's fitness>//
+      pop.naturalSelection(); //apply a simplified version of the NEAT (NeuroEvolution of Augmenting Topologies) algorithm 
+      pop.mutateChildren();   //TODO this needs a new name
+      fin = new goal(700 + (random(200)-100),100 + (random(200)-100));
+        background(255);
     }else{
     pop.update();
     
