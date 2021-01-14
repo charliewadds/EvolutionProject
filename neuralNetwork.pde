@@ -6,8 +6,9 @@ class neuralNetwork{
     float outputs[];
     neuralNetwork(float[] inputs, float[] weights){
     
-    layers.add(new layer(6,0,false));//10 inputs
-    layers.add(new layer(4,1,false));//TODO i think this has to go in neuralNetwork class
+    layers.add(new layer(7,0,false));//10 inputs
+    layers.add(new layer(8,1,false));//TODO i think this has to go in neuralNetwork class
+    layers.add(new layer(4,1,false));
     layers.add(new layer(2,2,true));//2 output neurons one for x and one for y of a PVector
         this.inpts = inputs;
 

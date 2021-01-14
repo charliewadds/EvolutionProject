@@ -31,7 +31,7 @@ void setup(){
     size(1000, 500, P2D);//initialize window
     
     
-    pop = new population(400);
+    pop = new population(200);
     
     
     
@@ -64,7 +64,7 @@ void draw(){
       //pop.calculateFitness(); //<calculate and update each dot's fitness>//
       pop.naturalSelection(); //apply a simplified version of the NEAT (NeuroEvolution of Augmenting Topologies) algorithm 
       pop.mutateChildren();   //TODO this needs a new name
-      fin = new goal(700 + (random(200)-100),100 + (random(200)-100));
+      fin = new goal(700 + (random(200)-100),(random(500)));
         background(255);
     }else{
     pop.update();

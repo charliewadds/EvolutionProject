@@ -14,12 +14,13 @@ class Dot{
     Dot(){
         
         pos= new PVector(100 +(random(100)-50), 250+ (random(100)-50));//TODO hardcoding
+        //pos= new PVector(100 , 250);
         vel= new PVector(0,0); 
         acc= new PVector(0,0); //<>// //<>//
-        
-        gene = new Gene(32);//TODO this is hard coding
-        senses = new float[10];
         myBrain = new neuralNetwork(senses,gene.weights);
+        gene = new Gene(96);//TODO this is hard coding
+        senses = new float[11];
+        
         
         look(); //<>// //<>//
         
@@ -35,20 +36,22 @@ class Dot{
     }
     void look(){//set senses
         
-        senses[0]= Math.abs(pos.x-fin.x);//distance to the end TODO might want to inverse this
-        senses[1]=Math.abs(pos.y-fin.y);
+        senses[0]= (fin.x - pos.x)/500;//distance to the end TODO might want to inverse this
+        senses[1]= (fin.y - pos.y)/500;
         senses[2]= 1;
+        //senses[3]= random(2)
 
 
         minDist();
-        normalizeLook();
+       
         raycast();
+         normalizeLook();
         
 
 
     } 
     void normalizeLook(){
-      for(int i = 2; i< senses.length; i++){//start at 2 so only normalize raycasts
+      for(int i = 4; i< senses.length; i++){//start at 2 so only normalize raycasts
         senses[i] = 50/(senses[i]);
 
 
@@ -59,7 +62,7 @@ class Dot{
     }
     void raycast(){
       //TODO this is rediculosly slow O(N^3) this could probobly be O(numObstacles*numRays)
-    int numRays = 4;
+    int numRays = 5;
     float[] rays = new float[numRays];
     int i = 0;
     int ii = 0;
@@ -97,7 +100,7 @@ class Dot{
         
           if(obst.get(ii).hit(x,y)||(x<2||y<2||x>1000-2||y>500-2)){//if it hit an obstacle
             found = true;
-            senses[i+3] = raylengths*10;
+            senses[i+4] = raylengths*10;
            //loopCount++;
             
           

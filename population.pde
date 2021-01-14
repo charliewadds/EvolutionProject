@@ -128,15 +128,12 @@ class population{
 
     float runningSum =0;
     //print(runningSum);
-    int i =0; //<>//
+    int i =0; //<>// //<>//
     while(i<dots.length){//TODO this better using weighted average.. i think
        runningSum += dots[i].fitness;
-       if(runningSum>rand&& dots[i].fitness>0.2){
+       if(runningSum>rand){
          return dots[i]; 
-       } else if(dots[i].fitness>0.2) {
-         dots[i].gene.randomise();
-         return dots[i];
-       }
+       } 
        
 
       i++;
@@ -171,4 +168,10 @@ class population{
         } 
         bestDot = maxIndex;
   }
+
+
+  //population copy(){
+  //  population newPop = new population();
+      
+  //}
 }
